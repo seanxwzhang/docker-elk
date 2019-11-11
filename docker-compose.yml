@@ -11,9 +11,7 @@ services:
         source: ./elasticsearch/config/elasticsearch.yml
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
-      - type: volume
-        source: elasticsearch
-        target: /usr/share/elasticsearch/data
+      - elasticsearch:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -70,3 +68,7 @@ networks:
 
 volumes:
   elasticsearch:
+    driver_opts:
+      type: none
+      device: /mnt/pve/data/elasticsearch
+      o: bind
